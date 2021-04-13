@@ -13,11 +13,11 @@ import OneWay as network
 net = network.info()
 env = environment.env(net)
 gamma = 1.0 #0.99 #discount factor 
-solved_criterion = 0.21
+solved_criterion = 0.41
 max_iter_episode = 200
 
-#np.random.seed(seed)
-#tf.random.set_seed(seed)
+np.random.seed(173)
+tf.random.set_seed(173)
 
 n_inputs = 52
 n_actions = 2

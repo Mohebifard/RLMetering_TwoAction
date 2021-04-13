@@ -80,10 +80,6 @@ class simulation:
                 else: # all other cells
                     x[t + 1, I] += - y[i];
                     x[t + 1, J] += + y[i];
-
         
-        #Z = np.sum([x[:, Cs-1]])        
-        density = x/N
-        Z = np.mean([density[:, Cs-1]])
-        return (density, Y, Z);
+        return (x, Y);
 

@@ -22,32 +22,23 @@ class env():
         return self.state 
     
     def step(self, action):
-        x, _, z = self.sim.xyz(2, self.net.C, self.net.Cg, 
+        x, _, = self.sim.xyz(2, self.net.C, self.net.Cg, 
                                self.net.Cs, self.net.CI, self.net.Q, self.net.N, 
                                self.net.D[self.Time:,:], self.net.W[self.Time:,:], 
                                self.net.AC, self.state, True, action)
         
-        self.state = np.array(x[1,:])
-        observation = np.array(self.state)
-        reward  = np.array(z)
-        self.Time += 1
+        density = x[2-1,:]/self.net.N
+        self.state = np.array(density)
+        
+        reward = np.mean([density[self.net.Cs-1]])
         
         done = False
+        self.Time += 1
         if (self.Time >= self.net.T-1):
             done = True 
         
         info = "System Time of {}".format(self.Time)
         
-        return [observation, reward, done, info]
-    
-        
-            
-            
-        
-        
-        
-        
-        
-        
+        return [self.state, reward, done, info]
     
         
