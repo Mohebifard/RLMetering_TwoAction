@@ -68,7 +68,7 @@ def Solve(T, C, Cg, Cs, CI, Q, N, D, W, AC, X0, state_occupance = True, printsol
     #print solutions
     if printsol:
         model.export("./model_export")
-        print("\n\n")
+        print("\n\nPrinting LP solutions")
         for t in range(T):
             for i in C:
                 print("%.2f\t" % solution.get_value(x[t, i]), end="")
@@ -85,6 +85,9 @@ def Solve(T, C, Cg, Cs, CI, Q, N, D, W, AC, X0, state_occupance = True, printsol
     
     print("The LP model is solved!\n\n")
     
-    return (solution.get_value_dict(x), solution.get_value_dict(y), solution.get_objective_value(), solution.solve_status)    
+    x_out = np.array([[solution.get_value(x[t, i]) for i in C] for t in range(T)])
+    y_out = np.array([[solution.get_value(y[t, i[0], i[1]]) for i in AC] for t in range(T-1)])
+    
+    return (x_out, y_out, solution.get_objective_value(), solution.solve_status)    
     
 

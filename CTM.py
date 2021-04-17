@@ -77,6 +77,12 @@ class simulation:
                     k = np.where(Cg == AC[i, 0])[0]
                     x[t + 1, I] += D[t, k] - y[i]
                     x[t + 1, J] += y[i]
+                    continue
+                
+                if Ind == 5: #update sink cells
+                    x[t + 1, I] += - y[i]
+                    x[t + 1, J] = y[i]
+                
                 else: # all other cells
                     x[t + 1, I] += - y[i];
                     x[t + 1, J] += + y[i];
