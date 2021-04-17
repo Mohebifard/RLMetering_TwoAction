@@ -14,7 +14,7 @@ env._max_episode_steps = max_steps
 state = np.array(env.reset(1))
 
 #LP model
-x_opt, y_opt, z_opt, status_opt = LP.Solve(max_steps, net.C, net.Cg, net.Cs, net.CI, net.Q, net.N, net.D, net.W, net.AC, state, True, False)    
+x_opt, y_opt, z_opt, status_opt = LP.Solve(max_steps, net.C, net.Cg, net.Cs, net.CI, net.Q, net.N, net.D, net.W, net.AC, state, True, True)    
 print("Objective function of the optimization model: %.2f " % (z_opt/(150 * net.Q[net.Cs[0]-1])))
 
 x.append(state*net.N)
@@ -32,9 +32,9 @@ while not done and iters<max_steps-1:
     rewards += reward 
     iters += 1
 
-    #for j in range(np.size(state)):
-        #print("%.2f\t" % x[-1][j], end="")
-    #print()
+    for j in range(np.size(state)):
+        print("%.2f\t" % x[-1][j], end="")
+    print()
 
 print("\n\n\nTotal rewards (occupancy): %.2f" % (rewards))
 
