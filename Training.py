@@ -12,8 +12,8 @@ import OneWay as network
 # create the environment 
 net = network.info()
 env = environment.env(net)
-gamma = 1.0 #0.99 #discount factor 
-solved_criterion = 0.41
+gamma = 0.99 #0.99 #discount factor 
+solved_criterion = 1.74
 max_iter_episode = 200
 
 np.random.seed(173)
@@ -21,7 +21,7 @@ tf.random.set_seed(173)
 
 n_inputs = 52
 n_actions = 2
-n_hidden = 500
+n_hidden = 400
 
 #set the policy and value model 
 input_layer = layers.Input(shape=(n_inputs,))
@@ -37,6 +37,7 @@ model.summary()
 
 #set the optimizer
 optimizer = keras.optimizers.Adam(learning_rate=0.001)
+#optimizer = keras.optimizers.SGD(learning_rate=0.001)
 
 #set the initial lists and variables
 eps = np.finfo(np.float32).eps.item() 
